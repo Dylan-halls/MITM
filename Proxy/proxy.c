@@ -30,9 +30,10 @@ void get_host(char headers[]){
 }
 
 void sock_send(const char *text, int sockfd){
-  char buffer[6000];
-  strcpy(buffer, text);
-  write(sockfd, buffer, strlen(buffer));
+  //char buffer[6000];
+  //strcpy(buffer, text);
+  write(sockfd, text, strlen(text));
+  //memset(&buffer, '\0', sizeof(buffer));
 }
 
 void connection_handler(int sockfd){
@@ -47,6 +48,8 @@ void connection_handler(int sockfd){
     get_host(headers);
     sock_send(headers, sockfd);
     close(sockfd);
+    memset(&readbuffer, '\0', sizeof(readbuffer));
+    memset(&headers, '\0', sizeof(headers));
     return;
   }
 }
